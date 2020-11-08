@@ -1,10 +1,11 @@
-package domain;
+package factory;
 
+import domain.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class SymptomFactory3 {
+public class SymptomFactory3 implements SymptomFactoriable{
 	
 	private List<Symptom> symptoms = new ArrayList<Symptom>();
 	private List<String> digestiveSymptom = new ArrayList<String>();

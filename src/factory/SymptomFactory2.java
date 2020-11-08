@@ -1,12 +1,17 @@
-package domain;
+package factory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import domain.*;
 
-public class SymptomFactory2 {
+public class SymptomFactory2 implements SymptomFactoriable{
 	
 	private List<Symptom> symptoms = new ArrayList<Symptom>();
+	private DigestiveSymptom ds = null;
+	private NeuroMuscularSymptom nms = null;
+	private RespiratorySymptom rs = null;
+	private Symptom s = null;
 
 	public Symptom createSymptom(String symptomName) {
 		List<String> impact5 = Arrays.asList("fiebre", "tos seca", "astenia","expectoracion");
@@ -20,13 +25,19 @@ public class SymptomFactory2 {
 	    List<String> neuroMuscularSymptom=Arrays.asList("fiebre", "astenia", "cefalea", "mialgia","escalofrios", "mareos");
 	    List<String> respiratorySymptom=Arrays.asList("tos seca","expectoracion","disnea","dolor de garganta", "congestion nasal","hemoptisis","congestion conjuntival");
 
-	    Symptom s = null;
+	    
 	    for (int i=0; i < symptoms.size(); i++) {
 	    	s = symptoms.get(i);
 	    	if ( s.getName().equals(symptomName)) {
-	    		if (digestiveSymptom.contains(symptomName)) return (DigestiveSymptom) s;
-		    	if (neuroMuscularSymptom.contains(symptomName)) return (NeuroMuscularSymptom) s;
-		    	if (respiratorySymptom.contains(symptomName)) return (RespiratorySymptom) s;
+				if (digestiveSymptom.contains(symptomName)) {
+	    			ds = (DigestiveSymptom) s;
+	    			return ds; }
+		    	if (neuroMuscularSymptom.contains(symptomName)) {
+		    		nms = (NeuroMuscularSymptom) s; 
+		    		return nms; }
+		    	if (respiratorySymptom.contains(symptomName)) 
+		    		rs = (RespiratorySymptom) s;
+		    		return rs;
 	    	}
 	    }
 
@@ -37,12 +48,17 @@ public class SymptomFactory2 {
 		      else if (impact3.contains(symptomName)) {impact=3;index= index3.get(impact3.indexOf(symptomName));}
 		        else if (impact1.contains(symptomName)) {impact=1; index= index1.get(impact1.indexOf(symptomName));}
 		 
-		    if (impact!=0)  {
-		    	s = new Symptom(symptomName,(int)index, impact);
+		    try {
+		    	if (impact!=0)  {
+			    	s = new Symptom(symptomName,(int)index, impact);
+			    	if (digestiveSymptom.contains(symptomName)) return new DigestiveSymptom(symptomName,(int)index, impact);
+			    	if (neuroMuscularSymptom.contains(symptomName)) return new NeuroMuscularSymptom(symptomName,(int)index, impact);
+			    	if (respiratorySymptom.contains(symptomName)) return new RespiratorySymptom(symptomName,(int)index, impact);
+			    }
+		    } catch (Exception e) {
+		    	e.printStackTrace();
+		    } finally {
 		    	symptoms.add(s);
-		    	if (digestiveSymptom.contains(symptomName)) return (DigestiveSymptom) s;
-		    	if (neuroMuscularSymptom.contains(symptomName)) return (NeuroMuscularSymptom) s;
-		    	if (respiratorySymptom.contains(symptomName)) return (RespiratorySymptom) s;
 		    }
 	    }
 	    

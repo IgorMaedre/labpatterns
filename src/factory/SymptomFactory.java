@@ -1,9 +1,11 @@
-package domain;
+package factory;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class SymptomFactory {
+import domain.*;
+
+public class SymptomFactory implements SymptomFactoriable {
 	
 	public Symptom createSymptom(String symptomName) {
 		List<String> impact5 = Arrays.asList("fiebre", "tos seca", "astenia","expectoracion");

@@ -7,12 +7,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Set;
+
+import factory.SymptomFactoriable;
+import factory.SymptomFactory2;
 import iterator.Covid19PacientIterator;
 
 public class Covid19Pacient extends Observable{
 	private String  name; 
 	private int age;
-	private SymptomFactory sf = new SymptomFactory();
+	private SymptomFactory2 sf = new SymptomFactory2();
 	private Map<Symptom,Integer> symptoms=new HashMap<Symptom,Integer>();
 
 	public Covid19Pacient(String name, int years) {
@@ -95,7 +98,7 @@ public class Covid19Pacient extends Observable{
 		return impact;
 	}
 	
-	private Symptom createSymptom(SymptomFactory sf, String symptomName) {
+	private Symptom createSymptom(SymptomFactoriable sf, String symptomName) {
 		return sf.createSymptom(symptomName);
 	}
 }

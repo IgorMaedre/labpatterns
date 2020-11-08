@@ -7,6 +7,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import factory.SymptomFactory;
+
 
 public class Medicament {
 	private String name;
